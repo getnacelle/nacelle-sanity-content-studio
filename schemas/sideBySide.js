@@ -62,7 +62,7 @@ export default {
     {
       name: 'ctaUrl',
       title: 'Call-to-action Url',
-      type: 'url'
+      type: 'string'
     },
     {
       name: 'reverseDesktop',
