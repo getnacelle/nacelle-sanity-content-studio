@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
@@ -33,6 +33,7 @@ export const NacelleCollections = () => (
 )
 
 const NacelleLinker = ({ type, onChange }) => {
+  const [interfaceOpen, setInerfaceOpen] = useState(false)
   const handle = useContext(HandleContext)
 
   return (
@@ -54,12 +55,15 @@ const NacelleLinker = ({ type, onChange }) => {
               fontSize={[2, 2, 3]}
               mode="ghost"
               padding={[2, 2, 3]}
-              text="Select"
+              text={interfaceOpen ? 'Close' : 'Select'}
+              onClick={() => setInerfaceOpen(!interfaceOpen)}
             />
           </Inline>
         </Box>
-        <NacelleCollections />
-        <NacelleProducts />
+        <Box style={{ display: interfaceOpen ? 'block' : 'none' }}>
+          <NacelleCollections />
+          <NacelleProducts />
+        </Box>
       </FormField>
     </HandleContext.Provider>
   )
