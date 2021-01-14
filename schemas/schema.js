@@ -5,17 +5,19 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // We import object and document schemas
-import blockContent from './blockContent'
-import heroBanner from './heroBanner'
-import productGrid from './productGrid'
-import sideBySide from './sideBySide'
-import blog from './blog'
-import article from './article'
-import author from './author'
-import page from './page'
-import content from './content'
-import testimonial from './testimonial'
-import testimonials from './testimonials'
+import {
+  blockContent,
+  heroBanner,
+  productGrid,
+  sideBySide,
+  blog,
+  article,
+  author,
+  page,
+  content,
+  testimonial,
+  testimonials
+} from './documents'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -38,6 +40,6 @@ export default createSchema({
     testimonial,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
-    blockContent,
+    blockContent
   ])
 })

@@ -1,3 +1,5 @@
+import NacelleLinker from '../../components/NacelleLinker'
+
 export default {
   name: 'productGrid',
   title: 'Product Grid',
@@ -9,10 +11,10 @@ export default {
       type: 'string',
       options: {
         list: [
-          {title: 'ContentHeroBanner', value: 'ContentHeroBanner'},
-          {title: 'ContentSideBySide', value: 'ContentSideBySide'},
-          {title: 'ContentTestimonials', value: 'ContentTestimonials'},
-          {title: 'ContentProductGrid', value: 'ContentProductGrid'}
+          { title: 'ContentHeroBanner', value: 'ContentHeroBanner' },
+          { title: 'ContentSideBySide', value: 'ContentSideBySide' },
+          { title: 'ContentTestimonials', value: 'ContentTestimonials' },
+          { title: 'ContentProductGrid', value: 'ContentProductGrid' }
         ]
       }
     },
@@ -29,13 +31,16 @@ export default {
         source: 'title',
         maxLength: 96
       },
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required()
     },
     {
       name: 'columns',
       title: 'Columns',
       type: 'number',
-      validation: Rule => Rule.integer().min(1).max(12)
+      options: {
+        range: { min: 0, max: 10, step: 0.2 }
+      },
+      validation: (Rule) => Rule.integer().min(1).max(12)
     },
     {
       name: 'publishedDate',
@@ -43,15 +48,16 @@ export default {
       type: 'datetime'
     },
     {
-      name: 'blogHandle',
-      title: 'Blog Handle',
+      name: 'collectionHandle',
+      title: 'Collection Handle',
       type: 'string',
+      inputComponent: NacelleLinker
     }
   ],
 
   preview: {
     select: {
-      title: 'title',
+      title: 'title'
     }
   }
 }
