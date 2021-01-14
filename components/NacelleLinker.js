@@ -5,12 +5,32 @@ import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import FormField from 'part:@sanity/components/formfields/default'
 
 import { Heading, Box, TextInput, Inline, Button } from '@sanity/ui'
-import NacelleResults from './NacelleIndexEntries'
+import NacelleData from './NacelleIndexEntries'
+import { GET_PRODUCTS, GET_COLLECTIONS } from '../queries'
 
 const createPatchFrom = (value) =>
   PatchEvent.from(value === '' ? unset() : set(value))
 
 const HandleContext = React.createContext('')
+
+const handleHailFrequencyData = (res, queryName) =>
+  res && res.data && res.data[queryName] && res.data[queryName].items
+
+export const NacelleProducts = () => (
+  <NacelleData
+    title="Products"
+    query={GET_PRODUCTS}
+    dataHandler={(res) => handleHailFrequencyData(res, 'getProducts')}
+  />
+)
+
+export const NacelleCollections = () => (
+  <NacelleData
+    title="Collections"
+    query={GET_COLLECTIONS}
+    dataHandler={(res) => handleHailFrequencyData(res, 'getCollections')}
+  />
+)
 
 const NacelleLinker = ({ type, onChange }) => {
   const handle = useContext(HandleContext)
@@ -38,8 +58,8 @@ const NacelleLinker = ({ type, onChange }) => {
             />
           </Inline>
         </Box>
-        <NacelleResults type="product" title="Products" />
-        <NacelleResults type="collection" title="Collections" />
+        <NacelleCollections />
+        <NacelleProducts />
       </FormField>
     </HandleContext.Provider>
   )
