@@ -5,7 +5,7 @@ import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import FormField from 'part:@sanity/components/formfields/default'
 
 import { Heading, Box, TextInput, Inline, Button } from '@sanity/ui'
-import NacelleData from './NacelleIndexEntries'
+import NacelleDataFetcher from './NacelleDataFetcherFetcher'
 import { GET_PRODUCTS, GET_COLLECTIONS } from '../queries'
 
 const createPatchFrom = (value) =>
@@ -17,7 +17,7 @@ const handleHailFrequencyData = (res, queryName) =>
   res && res.data && res.data[queryName] && res.data[queryName].items
 
 export const NacelleProducts = () => (
-  <NacelleData
+  <NacelleDataFetcher
     title="Products"
     query={GET_PRODUCTS}
     dataHandler={(res) => handleHailFrequencyData(res, 'getProducts')}
@@ -25,7 +25,7 @@ export const NacelleProducts = () => (
 )
 
 export const NacelleCollections = () => (
-  <NacelleData
+  <NacelleDataFetcher
     title="Collections"
     query={GET_COLLECTIONS}
     dataHandler={(res) => handleHailFrequencyData(res, 'getCollections')}
