@@ -5,7 +5,7 @@ import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import FormField from 'part:@sanity/components/formfields/default'
 
 import { Heading, Box, TextInput, Inline, Button } from '@sanity/ui'
-import NacelleDataFetcher from './NacelleDataFetcherFetcher'
+import NacelleDataFetcher from './NacelleDataFetcher'
 import { GET_PRODUCTS, GET_COLLECTIONS } from '../queries'
 
 const createPatchFrom = (value) =>
