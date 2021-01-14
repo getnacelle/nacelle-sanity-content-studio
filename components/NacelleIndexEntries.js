@@ -94,10 +94,6 @@ const NacelleResults = ({ title, type, first = 2000, after }) => {
 }
 
 NacelleResults.propTypes = {
-  spaceCredentials: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    token: PropTypes.string.isRequired
-  }).isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['product', 'collection']),
   first: PropTypes.number,
