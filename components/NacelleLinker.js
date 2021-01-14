@@ -32,7 +32,11 @@ export const NacelleCollections = () => (
   />
 )
 
-const NacelleLinker = ({ type, onChange }) => {
+const NacelleLinker = ({
+  type,
+  onChange,
+  dataType = ['products', 'collections']
+}) => {
   const [interfaceOpen, setInerfaceOpen] = useState(false)
   const handle = useContext(HandleContext)
 
@@ -55,14 +59,15 @@ const NacelleLinker = ({ type, onChange }) => {
               fontSize={[2, 2, 3]}
               mode="ghost"
               padding={[2, 2, 3]}
-              text={interfaceOpen ? 'Close' : 'Select'}
+              text={interfaceOpen ? 'X' : 'Select'}
+              tone={interfaceOpen ? 'critical' : 'default'}
               onClick={() => setInerfaceOpen(!interfaceOpen)}
             />
           </Inline>
         </Box>
         <Box style={{ display: interfaceOpen ? 'block' : 'none' }}>
-          <NacelleCollections />
-          <NacelleProducts />
+          {dataType.includes('collections') && <NacelleCollections />}
+          {dataType.includes('products') && <NacelleProducts />}
         </Box>
       </FormField>
     </HandleContext.Provider>
@@ -71,9 +76,13 @@ const NacelleLinker = ({ type, onChange }) => {
 
 NacelleLinker.propTypes = {
   type: PropTypes.shape({
-    title: PropTypes.string
+    title: PropTypes.string,
+    options: PropTypes.shape({
+      dataType: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
+    })
   }).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  dataType: PropTypes.array
 }
 
 export default React.forwardRef((props, ref) => (
