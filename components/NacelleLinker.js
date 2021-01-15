@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import styled from 'styled-components'
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import FormField from 'part:@sanity/components/formfields/default'
 
-import { Heading, Box, TextInput, Inline, Button, Tab, TabList } from '@sanity/ui'
+import {
+  Heading,
+  Box,
+  TextInput,
+  Inline,
+  Button,
+  Tab,
+  TabList
+} from '@sanity/ui'
 import NacelleDataFetcher from './NacelleDataFetcher'
 import { GET_PRODUCTS, GET_COLLECTIONS } from '../queries'
 import { HandleContext } from '../context/handleContext'
@@ -16,74 +23,69 @@ const createPatchFrom = (value) =>
 const handleHailFrequencyData = (res, queryName) =>
   res && res.data && res.data[queryName] && res.data[queryName].items
 
-const DataFetcherTab = styled(NacelleDataFetcher)`
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-`
-
-const NacelleProducts = () => (
-  <DataFetcherTab
-    query={GET_PRODUCTS}
-    dataHandler={(res) => handleHailFrequencyData(res, 'getProducts')}
-  />
-)
-
-const NacelleCollections = () => (
-  <DataFetcherTab
-    query={GET_COLLECTIONS}
-    dataHandler={(res) => handleHailFrequencyData(res, 'getCollections')}
-  />
-)
-
-// const TabButton = styled(Button)`
-//   color: '#000000';
-//   padding: '1em';
-// `
-
-const TabItem = ({ label, handler, active }) => {
-  return (
-    <Tab
-      className="tablinks"
-      onClick={handler}
-      style={{ backgroundColor: active ? '#cce8e4' : 'unset' }}
-      label={label}
-    />
+const NacelleData = ({ dataType, active }) => {
+  const getProducts = useCallback((res) =>
+    handleHailFrequencyData(res, 'getProducts')
   )
+  const getCollections = useCallback((res) =>
+    handleHailFrequencyData(res, 'getCollections')
+  )
+
+  switch (dataType) {
+    case 'products':
+      return (
+        <NacelleDataFetcher
+          query={GET_PRODUCTS}
+          dataHandler={getProducts}
+          className="tabContent"
+          active={active}
+        />
+      )
+    case 'collections':
+      return (
+        <NacelleDataFetcher
+          query={GET_COLLECTIONS}
+          dataHandler={getCollections}
+          className="tabContent"
+          active={active}
+        />
+      )
+  }
 }
 
-TabItem.propTypes = {
-  label: PropTypes.string,
-  handler: PropTypes.func,
+NacelleData.propTypes = {
+  dataType: PropTypes.string.isRequired,
   active: PropTypes.bool
 }
 
-// const TabContainer = styled.div`
-//   overflow: hidden;
-//   border: 1px solid #ccc;
-// `
-
-const Interface = ({ dataType, interfaceOpen, children }) => {
+const Interface = ({
+  dataType,
+  interfaceOpen,
+  children,
+  activeTab,
+  setActiveTab
+}) => {
   const dataTypes = Array.isArray(dataType) ? dataType.sort() : [dataType]
   const multiTab = dataTypes.length > 1
-  const [activeTab, setActiveTab] = useState(0)
 
   return (
     <Box style={{ display: interfaceOpen ? 'block' : 'none' }}>
       {multiTab && (
         <TabList className="tab">
           {dataTypes.map((type, idx) => (
-            <TabItem
+            <Tab
               key={type}
               label={type}
-              active={activeTab === idx}
-              handler={() => setActiveTab(idx)}
+              aria-controls={`${type}-panel`}
+              selected={idx === activeTab}
+              className="tablinks"
+              onClick={() => setActiveTab(idx)}
+              space={2}
             />
           ))}
         </TabList>
       )}
-      {[...children].sort()[activeTab]}
+      {children}
     </Box>
   )
 }
@@ -91,12 +93,15 @@ const Interface = ({ dataType, interfaceOpen, children }) => {
 Interface.propTypes = {
   dataType: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   interfaceOpen: PropTypes.bool.isRequired,
+  activeTab: PropTypes.number,
+  setActiveTab: PropTypes.func,
   children: PropTypes.node.isRequired
 }
 
 const NacelleLinker = ({ type, onChange }) => {
   const [interfaceOpen, setInerfaceOpen] = useState(false)
   const [handle, setHandle] = useState('')
+  const [activeTab, setActiveTab] = useState(0)
 
   const selectItem = (handle) => {
     setHandle(handle)
@@ -137,13 +142,19 @@ const NacelleLinker = ({ type, onChange }) => {
         </Inline>
       </Box>
       <HandleContext.Provider value={{ handle, setHandle: selectItem }}>
-        <Interface dataType={dataType} interfaceOpen={interfaceOpen}>
-          {dataType.includes('collections') && (
-            <NacelleCollections className="tabContent" />
-          )}
-          {dataType.includes('products') && (
-            <NacelleProducts className="tabContent" />
-          )}
+        <Interface
+          dataType={dataType}
+          interfaceOpen={interfaceOpen}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        >
+          {dataType.map((type, idx) => (
+            <NacelleData
+              key={type}
+              dataType={type}
+              active={idx === activeTab}
+            />
+          ))}
         </Interface>
       </HandleContext.Provider>
     </FormField>

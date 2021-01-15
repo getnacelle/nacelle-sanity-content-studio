@@ -2,12 +2,22 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 // import styled from 'styled-components'
-import { Container, Menu, MenuItem, Box, Text, Flex, studioTheme, ThemeProvider, Layer } from '@sanity/ui'
+import {
+  Container,
+  Menu,
+  MenuItem,
+  Box,
+  Text,
+  Flex,
+  studioTheme,
+  ThemeProvider,
+  Layer
+} from '@sanity/ui'
 import { HandleContext } from '../context/handleContext'
 
 const Thumb = ({ src }) => {
   return (
-    <div style={{width: '3rem', height: '3rem', background: `url(${src})`}} />
+    <div style={{ width: '3rem', height: '3rem', background: `url(${src})` }} />
   )
 }
 Thumb.propTypes = {
@@ -19,12 +29,10 @@ const Entry = ({ item }) => {
   return (
     <MenuItem paddingX={2} onClick={() => setHandle(item.handle)}>
       <Flex>
-        {item.featuredMedia &&
-          <Thumb src={item.featuredMedia.thumbnailSrc} />
-        }
+        {item.featuredMedia && <Thumb src={item.featuredMedia.thumbnailSrc} />}
         <Box padding={3} flex={1}>
           <Text size={2}>
-            {item.title} <span style={{color: '#89a'}}>({item.handle})</span>
+            {item.title} <span style={{ color: '#89a' }}>({item.handle})</span>
           </Text>
         </Box>
       </Flex>
@@ -36,12 +44,20 @@ Entry.propTypes = {
   item: PropTypes.object
 }
 
-const Gallery = ({ data }) => {
+const Gallery = ({ data, active }) => {
   return (
     <ThemeProvider theme={studioTheme}>
       <Layer>
-        <Container overflow="auto" style={{maxHeight: '16rem', border: '1px solid #ddd', marginRight: '4px'}}>
-          <Menu space={1} style={{marginTop: '1rem'}}>
+        <Container
+          overflow="auto"
+          style={{
+            maxHeight: '16rem',
+            border: '1px solid #ddd',
+            marginRight: '4px',
+            display: !active ? 'none' : null
+          }}
+        >
+          <Menu space={1} style={{ marginTop: '1rem' }}>
             {data &&
               data.map((item) => <Entry item={item} key={item.globalHandle} />)}
           </Menu>
@@ -52,7 +68,8 @@ const Gallery = ({ data }) => {
 }
 
 Gallery.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  active: PropTypes.bool
 }
 
 export default Gallery
