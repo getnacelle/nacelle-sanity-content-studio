@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import FormField from 'part:@sanity/components/formfields/default'
-import Entry from './Entry'
 
 import {
   ThemeProvider,
@@ -132,7 +131,7 @@ Interface.propTypes = {
 const NacelleLinker = ({ type, onChange }) => {
   const [handle, setHandle] = useState('')
   const [searchOptions, setSearchOptions] = useState([])
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState(null)
   const [activeTab, setActiveTab] = useState(0)
   const [interfaceOpen, setInerfaceOpen] = useState(false)
   const onClose = useCallback(() => setInerfaceOpen(false), [])

@@ -18,9 +18,6 @@ const NacelleResults = ({ query, dataHandler, first, after, active }) => {
             value: entry.title
           }))
       )
-      return () => {
-        setSearchOptions([])
-      }
     }
   }, [data, active])
 
