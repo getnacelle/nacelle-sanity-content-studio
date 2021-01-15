@@ -46,7 +46,6 @@ const NacelleResults = ({
 NacelleResults.propTypes = {
   query: PropTypes.string.isRequired,
   dataHandler: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
   first: PropTypes.number,
   after: PropTypes.string
 }

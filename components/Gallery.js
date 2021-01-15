@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { Stack, Box, Text } from '@sanity/ui'
+import { Stack, Box, Text, Button } from '@sanity/ui'
+import { HandleContext } from '../context/handleContext'
 
-const Entry = ({ item }) => (
-  <Box>
-    <Text size={4}>{item.handle}</Text>
-  </Box>
-)
+const Entry = ({ item }) => {
+  const { setHandle } = useContext(HandleContext)
+  return (
+    <Box>
+      <Text size={4}>{item.handle}</Text>
+      <Button onClick={() => setHandle(item.handle)}>Select</Button>
+    </Box>
+  )
+}
 
 Entry.propTypes = {
   item: PropTypes.object
