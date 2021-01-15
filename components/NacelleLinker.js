@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import FormField from 'part:@sanity/components/formfields/default'
 
-import { Heading, Box, TextInput, Inline, Button } from '@sanity/ui'
+import { Heading, Box, TextInput, Inline, Button, Tab, TabList } from '@sanity/ui'
 import NacelleDataFetcher from './NacelleDataFetcher'
 import { GET_PRODUCTS, GET_COLLECTIONS } from '../queries'
 import { HandleContext } from '../context/handleContext'
@@ -37,33 +37,32 @@ const NacelleCollections = () => (
   />
 )
 
-const TabButton = styled(Button)`
-  color: '#000000';
-  padding: '1em';
-`
+// const TabButton = styled(Button)`
+//   color: '#000000';
+//   padding: '1em';
+// `
 
-const Tab = ({ label, handler, active }) => {
+const TabItem = ({ label, handler, active }) => {
   return (
-    <TabButton
+    <Tab
       className="tablinks"
       onClick={handler}
       style={{ backgroundColor: active ? '#cce8e4' : 'unset' }}
-    >
-      {label}
-    </TabButton>
+      label={label}
+    />
   )
 }
 
-Tab.propTypes = {
+TabItem.propTypes = {
   label: PropTypes.string,
   handler: PropTypes.func,
   active: PropTypes.bool
 }
 
-const TabContainer = styled.div`
-  overflow: hidden;
-  border: 1px solid #ccc;
-`
+// const TabContainer = styled.div`
+//   overflow: hidden;
+//   border: 1px solid #ccc;
+// `
 
 const Interface = ({ dataType, interfaceOpen, children }) => {
   const dataTypes = Array.isArray(dataType) ? dataType.sort() : [dataType]
@@ -73,16 +72,16 @@ const Interface = ({ dataType, interfaceOpen, children }) => {
   return (
     <Box style={{ display: interfaceOpen ? 'block' : 'none' }}>
       {multiTab && (
-        <TabContainer className="tab">
+        <TabList className="tab">
           {dataTypes.map((type, idx) => (
-            <Tab
+            <TabItem
               key={type}
               label={type}
               active={activeTab === idx}
               handler={() => setActiveTab(idx)}
             />
           ))}
-        </TabContainer>
+        </TabList>
       )}
       {[...children].sort()[activeTab]}
     </Box>
