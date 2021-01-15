@@ -16,9 +16,8 @@ Entry.propTypes = {
 const Gallery = ({ data }) => {
   return (
     <Stack space={5}>
-      {data.map((item) => (
-        <Entry item={item} key={item.globalHandle} />
-      ))}
+      {data &&
+        data.map((item) => <Entry item={item} key={item.globalHandle} />)}
     </Stack>
   )
 }

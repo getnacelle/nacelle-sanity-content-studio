@@ -16,29 +16,72 @@ const HandleContext = React.createContext('')
 const handleHailFrequencyData = (res, queryName) =>
   res && res.data && res.data[queryName] && res.data[queryName].items
 
-export const NacelleProducts = () => (
+const NacelleProducts = () => (
   <NacelleDataFetcher
-    title="Products"
     query={GET_PRODUCTS}
     dataHandler={(res) => handleHailFrequencyData(res, 'getProducts')}
   />
 )
 
-export const NacelleCollections = () => (
+const NacelleCollections = () => (
   <NacelleDataFetcher
-    title="Collections"
     query={GET_COLLECTIONS}
     dataHandler={(res) => handleHailFrequencyData(res, 'getCollections')}
   />
 )
 
-const NacelleLinker = ({
-  type,
-  onChange,
-  dataType = ['products', 'collections']
-}) => {
+const Tab = ({ label, handler, active }) => {
+  return (
+    <button
+      onClick={handler}
+      style={{ backgroundColor: active ? '#cce8e4' : 'unset' }}
+    >
+      {label}
+    </button>
+  )
+}
+
+Tab.propTypes = {
+  label: PropTypes.text,
+  handler: PropTypes.func,
+  active: PropTypes.bool
+}
+
+const Interface = ({ dataType, interfaceOpen, children }) => {
+  const dataTypes = Array.isArray(dataType) ? dataType.sort() : [dataType]
+  const multiTab = dataTypes.length > 1
+  const [activeTab, setActiveTab] = useState(0)
+  return (
+    <>
+      <Box style={{ display: interfaceOpen ? 'block' : 'none' }}>
+        {multiTab &&
+          dataTypes.map((type, idx) => (
+            <Tab
+              key={type}
+              label={type}
+              active={activeTab === idx}
+              handler={() => setActiveTab(idx)}
+            />
+          ))}
+        {[...children].sort()[activeTab]}
+      </Box>
+    </>
+  )
+}
+
+Interface.propTypes = {
+  dataType: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  interfaceOpen: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired
+}
+
+const NacelleLinker = ({ type, onChange }) => {
   const [interfaceOpen, setInerfaceOpen] = useState(false)
   const handle = useContext(HandleContext)
+  const dataType = (type.options && type.options.dataType) || [
+    'collections',
+    'products'
+  ]
 
   return (
     <HandleContext.Provider>
@@ -65,10 +108,10 @@ const NacelleLinker = ({
             />
           </Inline>
         </Box>
-        <Box style={{ display: interfaceOpen ? 'block' : 'none' }}>
+        <Interface dataType={dataType} interfaceOpen={interfaceOpen}>
           {dataType.includes('collections') && <NacelleCollections />}
           {dataType.includes('products') && <NacelleProducts />}
-        </Box>
+        </Interface>
       </FormField>
     </HandleContext.Provider>
   )
@@ -81,8 +124,7 @@ NacelleLinker.propTypes = {
       dataType: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
     })
   }).isRequired,
-  onChange: PropTypes.func.isRequired,
-  dataType: PropTypes.array
+  onChange: PropTypes.func.isRequired
 }
 
 export default React.forwardRef((props, ref) => (

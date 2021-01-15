@@ -26,7 +26,6 @@ const fetcher = async (query, first, after) => {
 const NacelleResults = ({
   query,
   dataHandler = (data) => data,
-  title,
   first = 2000,
   after
 }) => {
@@ -41,12 +40,7 @@ const NacelleResults = ({
     setData(dataHandler(res))
   })
 
-  return (
-    <div>
-      <h2>{title}</h2>
-      <Gallery data={data} />
-    </div>
-  )
+  return <Gallery data={data} />
 }
 
 NacelleResults.propTypes = {
