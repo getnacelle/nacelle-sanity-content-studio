@@ -1,8 +1,11 @@
 export default function resolvePreviewUrl(document) {
   // replace with your Preview Site's URL
-  const baseUrl = 'https://prairie-wind-apparel-demo-preview.netlify.app'
-
+  const baseUrl = process.env.SANITY_STUDIO_PREVIEW_SITE_URL
   const handle = (document.handleValue && document.handleValue.current) || ''
+
+  if (!baseUrl) {
+    return null
+  }
 
   if (!handle) {
     return baseUrl
