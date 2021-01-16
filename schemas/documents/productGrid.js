@@ -49,9 +49,12 @@ export default {
     },
     {
       name: 'collectionHandle',
-      title: 'Collection Handle',
+      title: 'Collection',
       type: 'string',
-      inputComponent: NacelleLinker
+      inputComponent: NacelleLinker,
+      options: {
+        dataType: ['collections']
+      }
     }
   ],
 
