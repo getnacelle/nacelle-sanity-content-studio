@@ -49,7 +49,8 @@ export default {
           {type: 'heroBanner'},
           {type: 'productGrid'},
           {type: 'sideBySide'},
-          {type: 'testimonials'}
+          {type: 'testimonials'},
+          {type: 'testimonial'}
         ]
       }]
     }
