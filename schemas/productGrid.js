@@ -46,7 +46,35 @@ export default {
       name: 'blogHandle',
       title: 'Blog Handle',
       type: 'string',
-    }
+    },
+    {
+      name: 'pimHandle',
+      title: 'Collection or Product',
+      type: 'nacelleData',
+    },
+    {
+      name: 'collectionHandle',
+      title: 'Collection',
+      type: 'nacelleData',
+      options: {
+        dataType: ['collections'],
+      },
+    },
+    {
+      name: 'productHandles',
+      title: 'Multiple Products',
+      type: 'array',
+      of: [
+        {
+          name: 'productHandle',
+          title: 'Product',
+          type: 'nacelleData',
+          options: {
+            dataType: ['products'],
+          },
+        },
+      ],
+    },
   ],
 
   preview: {
