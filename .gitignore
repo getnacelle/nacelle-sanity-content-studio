@@ -1,4 +1,4 @@
-  
+
 # Logs
 logs
 *.log
@@ -50,4 +50,5 @@ package-lock.json
 
 # dotenv environment variables file
 .env
-.env.test
+.env.development
+.env.production

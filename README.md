@@ -30,4 +30,4 @@ This studio starter includes [@nacelle/sanity-plugin-pim-linker](https://www.npm
 
 Check out [./schemas/productGrid.js](https://github.com/getnacelle/nacelle-sanity-content-studio/blob/master/schemas/productGrid.js) to see some of the possibilities.
 
-Be sure to add your Nacelle spaceID and token in **./config/@nacelle/sanity-plugin-pim-linker.json**
+Be sure to add your Nacelle spaceID and token in **./config/@nacelle/sanity-plugin-pim-linker.json**. Or you can remove that file and instead set spaceId and token in `.env.development` / .`env.production`.
