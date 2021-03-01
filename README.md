@@ -11,7 +11,7 @@ Now you can do the following things:
 
 ## Nacelle Base Schema
 
-By cloning this Content Studio Starter we've already got all of the schemas needed to setup content on your Nacelle build.
+By cloning this Content Studio Starter we've already got all of the schemas needed to set up content on your Nacelle build.
 
 ### Local development
 
@@ -19,7 +19,15 @@ By cloning this Content Studio Starter we've already got all of the schemas need
 
 2. **Initialize project by running `sanity init` in the root folder.**
     - This will log you in to Sanity, create a project, set up a dataset, and generate the files needed to run the editing environment locally.
-    
+
 3. **Install dependencies with `npm install` in the root folder.**
 
 4. **Start the development server by running `sanity start` or `npm run start` in root folder**
+
+### Nacelle PIM Linker Plugin
+
+This studio starter includes [@nacelle/sanity-plugin-pim-linker](https://www.npmjs.com/package/@nacelle/sanity-plugin-pim-linker). This plugin provides a custom input component that makes it easier to reference product & collection data stored in Nacelle indices.
+
+Check out [./schemas/productGrid.js](https://github.com/getnacelle/nacelle-sanity-content-studio/blob/master/schemas/productGrid.js) to see some of the possibilities.
+
+Be sure to add your Nacelle spaceID and token in **./config/@nacelle/sanity-plugin-pim-linker.json**. Or you can remove that file and instead set spaceId and token in `.env.development` / .`env.production`.
