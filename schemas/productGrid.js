@@ -9,10 +9,10 @@ export default {
       type: 'string',
       options: {
         list: [
-          {title: 'ContentHeroBanner', value: 'ContentHeroBanner'},
-          {title: 'ContentSideBySide', value: 'ContentSideBySide'},
-          {title: 'ContentTestimonials', value: 'ContentTestimonials'},
-          {title: 'ContentProductGrid', value: 'ContentProductGrid'}
+          { title: 'ContentHeroBanner', value: 'ContentHeroBanner' },
+          { title: 'ContentSideBySide', value: 'ContentSideBySide' },
+          { title: 'ContentTestimonials', value: 'ContentTestimonials' },
+          { title: 'ContentProductGrid', value: 'ContentProductGrid' }
         ]
       }
     },
@@ -29,13 +29,13 @@ export default {
         source: 'title',
         maxLength: 96
       },
-      validation: Rule => Rule.required()
+      validation: (Rule) => Rule.required()
     },
     {
       name: 'columns',
       title: 'Columns',
       type: 'number',
-      validation: Rule => Rule.integer().min(1).max(12)
+      validation: (Rule) => Rule.integer().min(1).max(12)
     },
     {
       name: 'publishedDate',
@@ -45,20 +45,20 @@ export default {
     {
       name: 'blogHandle',
       title: 'Blog Handle',
-      type: 'string',
+      type: 'string'
     },
     {
       name: 'pimHandle',
       title: 'Collection or Product',
-      type: 'nacelleData',
+      type: 'nacelleData'
     },
     {
       name: 'collectionHandle',
       title: 'Collection',
       type: 'nacelleData',
       options: {
-        dataType: ['collections'],
-      },
+        dataType: ['collections']
+      }
     },
     {
       name: 'productHandles',
@@ -66,20 +66,19 @@ export default {
       type: 'array',
       of: [
         {
-          name: 'productHandle',
           title: 'Product',
           type: 'nacelleData',
           options: {
-            dataType: ['products'],
-          },
-        },
-      ],
-    },
+            dataType: ['products']
+          }
+        }
+      ]
+    }
   ],
 
   preview: {
     select: {
-      title: 'title',
+      title: 'title'
     }
   }
 }
