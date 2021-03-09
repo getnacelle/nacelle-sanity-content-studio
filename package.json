@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "check": "sanity check",
+    "deploy": "sanity deploy",
     "lint": "eslint ./",
     "test": "jest"
   },
