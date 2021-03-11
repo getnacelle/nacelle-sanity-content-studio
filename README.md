@@ -23,7 +23,7 @@ By cloning this Content Studio Starter we've already got all of the schemas need
 3. **Install dependencies with `npm install` in the root folder.**
 
 4. **Start the development server by running `sanity start` or `npm run start` in root folder**
-
+ 
 ### Nacelle PIM Linker Plugin
 
 This studio starter includes [@nacelle/sanity-plugin-pim-linker](https://www.npmjs.com/package/@nacelle/sanity-plugin-pim-linker). This plugin provides a custom input component that makes it easier to reference product & collection data stored in Nacelle indices.
@@ -31,3 +31,23 @@ This studio starter includes [@nacelle/sanity-plugin-pim-linker](https://www.npm
 Check out [./schemas/productGrid.js](https://github.com/getnacelle/nacelle-sanity-content-studio/blob/master/schemas/productGrid.js) to see some of the possibilities.
 
 Be sure to add your Nacelle spaceID and token in **./config/@nacelle/sanity-plugin-pim-linker.json**. Or you can remove that file and instead set spaceId and token in `.env.development` / .`env.production`.
+
+### Preview Plugin
+
+This studio starter also includes the [@sanity/production-preview](https://www.sanity.io/docs/preview-content-on-site). With this plugin you can preview unpublished drafts of your page entries on your site.
+
+Include your preview URL in a .env file. This is the default base route for your site's pages.
+
+With our Nuxt starter this would be:
+
+```sh
+PREVIEW_URL="https://myshop-preview.foo.app/{entry_field.handle}"
+```
+
+With our Next.js starter this would be:
+
+```sh
+PREVIEW_URL="https://myshop.foo.app/api/preview?path=/pages/"
+```
+
+Now with the studio running locally or deployed you should see an 'Open preview' menu item appear in the document's context menu. Click that and you'll see you're draft content just like were live!
