@@ -41,13 +41,15 @@ Include your preview URL in a .env file. This is the default base route for your
 With our Nuxt starter this would be:
 
 ```sh
-PREVIEW_URL="https://myshop-preview.foo.app/{entry_field.handle}"
+PREVIEW_URL="https://myshop-preview.foo.app/"
 ```
 
 With our Next.js starter this would be:
 
 ```sh
-PREVIEW_URL="https://myshop.foo.app/api/preview?path=/pages/"
+PREVIEW_URL="https://myshop-preview.foo.app/api/preview?path=/"
 ```
 
-Now with the studio running locally or deployed you should see an 'Open preview' menu item appear in the document's context menu. Click that and you'll see you're draft content just like were live!
+In `./resolveProductionUrl.js` you can customize how you would like previewing to work for different page routes or content types.
+
+Now with the studio running locally or deployed you will see an 'Open preview' menu item appear in the document's context menu. Click that and you'll see you're draft content just like it were live!
