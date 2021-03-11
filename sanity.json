@@ -32,7 +32,8 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "@nacelle/sanity-plugin-pim-linker"
+    "@nacelle/sanity-plugin-pim-linker",
+    "@sanity/production-preview"
   ],
   "env": {
     "development": {
@@ -43,6 +44,10 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./resolveProductionUrl.js"
     }
   ]
 }
