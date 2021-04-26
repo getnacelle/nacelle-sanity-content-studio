@@ -52,3 +52,6 @@ package-lock.json
 .env
 .env.development
 .env.production
+
+# sanity exports
+exports
