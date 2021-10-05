@@ -41,13 +41,13 @@ Include your preview URL in a .env file. This is the default base route for your
 With our Nuxt starter this would be:
 
 ```sh
-PREVIEW_URL="https://myshop-preview.foo.app/"
+SANITY_STUDIO_PREVIEW_URL="https://myshop-preview.foo.app/"
 ```
 
 With our Next.js starter this would be:
 
 ```sh
-PREVIEW_URL="https://myshop-preview.foo.app/api/preview?path=/"
+SANITY_STUDIO_PREVIEW_URL="https://myshop-preview.foo.app/api/preview?path=/"
 ```
 
 In `./resolveProductionUrl.js` you can customize how you would like previewing to work for different page routes or content types.
