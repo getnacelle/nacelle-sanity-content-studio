@@ -7,25 +7,6 @@
     "projectId": "ciu31kkt",
     "dataset": "production"
   },
-  "__experimental_spaces": [
-    {
-      "name": "production",
-      "title": "Prod",
-      "default": true,
-      "api": {
-        "projectId": "ciu31kkt",
-        "dataset": "production"
-      }
-    },
-    {
-      "name": "sales-demo",
-      "title": "Sales Demo",
-      "api": {
-        "projectId": "ciu31kkt",
-        "dataset": "sales-demo"
-      }
-    }
-  ],
   "plugins": [
     "@sanity/base",
     "@sanity/components",
